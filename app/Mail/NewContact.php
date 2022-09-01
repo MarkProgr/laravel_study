@@ -17,9 +17,9 @@ class NewContact extends Mailable
      * @return void
      */
     public function __construct(
-    public string $email,
-    public string $name,
-    public mixed $phone
+        public string $email,
+        public string $name,
+        public mixed $phone
     )
     {
         //

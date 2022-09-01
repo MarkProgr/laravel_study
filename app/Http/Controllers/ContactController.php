@@ -22,7 +22,7 @@ class ContactController extends Controller
             $request->get('phone')
         );
 
-        session()->flash('success', 'Successfully!');
+        session()->flash('success', trans('messages.contact.success'));
 
         Mail::to('info@dev.com')->send($mail);
 
