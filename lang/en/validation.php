@@ -169,7 +169,10 @@ return [
     'attributes' => [
         'email' => 'Email',
         'name' => 'Name',
-        'phone' => 'Phone number'
+        'phone' => 'Phone number',
+        'title' => 'Title',
+        'year_of_issue' => 'Year of issue',
+        'description' => 'Description'
     ],
 
 ];

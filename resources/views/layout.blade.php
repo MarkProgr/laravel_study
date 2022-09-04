@@ -21,6 +21,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">About Us</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('movies.create.form') }}">Add film into library</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('movies.list') }}">Films</a>
+                </li>
             </ul>
         </div>
     </div>

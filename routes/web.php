@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MoviesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('main');
+
 Route::get('/about-us', [MainController::class, 'about'])->name('about');
+
 Route::get('/contact-us', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contact-new');
+
+Route::get('/movies', [MoviesController::class, 'list'])->name('movies.list');
+
+Route::get('/movies/create', [MoviesController::class, 'createMovie'])->name('movies.create.form');
+Route::post('/movies/create', [MoviesController::class, 'createCard'])->name('movies.create');
+
+Route::get('/movies/{id}', [MoviesController::class, 'showCard'])->name('movies.show.card');
+
+Route::get('/movies/{id}/edit', [MoviesController::class, 'editForm'])->name('movies.edit.form');
+Route::post('/movies/{id}/edit', [MoviesController::class, 'edit'])->name('movies.edit.card');
