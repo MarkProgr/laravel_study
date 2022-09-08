@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//use App\Http\Requests\EditRequest;
+use App\Http\Requests\Movies\CreateRequest;
 use App\Http\Requests\Movies\EditRequest;
-use App\Http\Requests\Movies\MoviesRequest;
-//use App\Http\Requests\MoviesRequest;
-use App\Models\Movies;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
@@ -16,10 +14,10 @@ class MoviesController extends Controller
         return view('movies.create-form');
     }
 
-    public function createCard(MoviesRequest $request)
+    public function createCard(CreateRequest $request)
     {
         $data = $request->validated();
-        $movie = new Movies($data);
+        $movie = new Movie($data);
         $movie->save();
 
         session()->flash('success', trans('messages.movie.success'));
@@ -29,28 +27,28 @@ class MoviesController extends Controller
 
     public function list()
     {
-        $movies = Movies::all();
+        $movies = Movie::all();
 
-        return view('movies.list', ['movies' => $movies]);
+        return view('movies.list', compact('movies'));
     }
 
     public function showCard(int $id)
     {
-        $movie = Movies::query()->findOrFail($id);
+        $movie = Movie::query()->findOrFail($id);
 
         return view('movies.show-card', compact('movie'));
     }
 
     public function editForm(int $id)
     {
-        $movie = Movies::query()->findOrFail($id);
+        $movie = Movie::query()->findOrFail($id);
 
         return view('movies.edit-form', compact('movie'));
     }
 
     public function edit(int $id, EditRequest $request)
     {
-        $movie = Movies::query()->findOrFail($id);
+        $movie = Movie::query()->findOrFail($id);
 
         $data = $request->validated();
         $movie->fill($data);

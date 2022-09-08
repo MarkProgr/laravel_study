@@ -8,7 +8,7 @@
 
         <div class="mb-3">
             <label for="title" class="form-label">{{ __('validation.attributes.title') }}</label>
-            <input type="text" value="{{ $movie->title }}" class="form-control  @error('title') is-invalid @enderror" aria-describedby="emailHelp" name="title">
+            <input type="text" value="{{ old($movie->title) }}" class="form-control  @error('title') is-invalid @enderror" aria-describedby="emailHelp" name="title">
             @error('email')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -16,7 +16,7 @@
 
         <div class="mb-3">
             <label for="year_of_issue" class="form-label">{{ __('validation.attributes.year_of_issue') }}</label>
-            <input type="text" value="{{ $movie->year_of_issue }}" class="form-control @error('year') is-invalid @enderror" name="year_of_issue">
+            <input type="text" value="{{ old($movie->year_of_issue) }}" class="form-control @error('year') is-invalid @enderror" name="year_of_issue">
             @error('year_of_issue')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">{{ __('validation.attributes.description') }}</label>
-            <textarea name="description" rows="3" class="form-control @error('description') is-invalid @enderror">{{ $movie->description }}</textarea>
+            <textarea name="description" rows="3" class="form-control @error('description') is-invalid @enderror">{{ old($movie->description) }}</textarea>
             @error('description')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
