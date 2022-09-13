@@ -172,7 +172,10 @@ return [
         'phone' => 'Phone number',
         'title' => 'Title',
         'year_of_issue' => 'Year of issue',
-        'description' => 'Description'
+        'description' => 'Description',
+        'password' => 'Password',
+        'password_confirmation' => 'Password Confirmation',
+        'checkbox' => 'I agree all the Rules'
     ],
 
 ];

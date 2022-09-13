@@ -58,4 +58,12 @@ class MoviesController extends Controller
 
         return redirect()->route('movies.list', ['id' => $movie->id]);
     }
+
+    public function deleteMovie(int $id)
+    {
+        $movie = Movie::query()->findOrFail($id)->delete();
+
+        session()->flash('success', trans('messages.movie.delete'));
+        return redirect()->route('movies.list');
+    }
 }

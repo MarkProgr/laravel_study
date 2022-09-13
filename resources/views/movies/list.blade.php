@@ -20,6 +20,12 @@
             <td>
                 <a class="btn btn-dark" href="{{ route('movies.show.card', ['id' => $movie->id]) }}">About</a>
                 <a class="btn btn-dark" href="{{ route('movies.edit.form', ['id' => $movie->id]) }}">Edit</a>
+                <form action="{{ route('movies.delete', ['id' => $movie->id]) }}" method="post">
+                    @csrf
+                    <button class="btn btn-outline-warning">
+                        Delete
+                    </button>
+                </form>
             </td>
         </tr>
         @endforeach
