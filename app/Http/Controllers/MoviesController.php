@@ -25,9 +25,9 @@ class MoviesController extends Controller
         return redirect()->route('movies.list');
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        $movies = Movie::all();
+        $movies = Movie::query()->paginate(5);
 
         return view('movies.list', compact('movies'));
     }
