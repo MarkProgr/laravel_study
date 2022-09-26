@@ -32,15 +32,13 @@ class SignUpController extends Controller
 
     public function verifyEmail(int $id, string $hash, Request $request)
     {
-        if (!$request->hasValidSignature())
-        {
+        if (!$request->hasValidSignature()) {
             abort(403);
         }
 
         $user = User::query()->findOrFail($id);
 
-        if (!hash_equals($hash, sha1($user->email)))
-        {
+        if (!hash_equals($hash, sha1($user->email))) {
             abort(403);
         }
 
