@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MoviesController;
@@ -40,3 +41,6 @@ Route::get('/sign-up', [SignUpController::class, 'showForm'])->name('sign-up.for
 Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('sign-up');
 
 Route::get('/verify-email/{id}/{hash}', [SignUpController::class, 'verifyEmail'])->name('verify-email');
+
+Route::get('/sign-in', [AuthController::class, 'signInForm'])->name('login');
+Route::post('/sign-up', [AuthController::class, 'signIn'])->name('sign-in');

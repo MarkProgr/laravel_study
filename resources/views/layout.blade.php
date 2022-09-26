@@ -15,12 +15,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
-                </li>
+                @if(auth()->check())
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('movies.create.form') }}">Add film into library</a>
                 </li>
@@ -28,10 +23,28 @@
                     <a class="nav-link" href="{{ route('movies.list') }}">Films</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contact Us</a>
+                </li>
+                @endif
+                @if(!auth()->check())
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('sign-up.form') }}">Sign Up</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Sign In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('about') }}">About Us</a>
+                </li>
+                @endif
             </ul>
         </div>
+        @if (auth()->check())
+            <form action="{{ route('logout') }}" method="post" class="form-inline">
+                @csrf
+                <button class="btn btn-danger">Logout</button>
+            </form>
+        @endif
     </div>
 </nav>
 <div class="container">
