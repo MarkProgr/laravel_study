@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,10 @@ Route::get('/movies/{id}', [MoviesController::class, 'showCard'])->name('movies.
 
 Route::get('/movies/{id}/edit', [MoviesController::class, 'editForm'])->name('movies.edit.form');
 Route::post('/movies/{id}/edit', [MoviesController::class, 'edit'])->name('movies.edit.card');
+
+Route::post('/movies/{id}/delete', [MoviesController::class, 'deleteMovie'])->name('movies.delete');
+
+Route::get('/sign-up', [SignUpController::class, 'showForm'])->name('sign-up.form');
+Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('sign-up');
+
+Route::get('/verify-email/{id}/{hash}', [SignUpController::class, 'verifyEmail'])->name('verify-email');

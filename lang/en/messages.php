@@ -5,6 +5,7 @@ return [
         'success' => 'Successfully!'
     ],
     'movie' => [
-        'success' => 'Movie successfully added'
+        'success' => 'Movie successfully added',
+        'delete' => 'Movie successfully deleted'
     ]
 ];
