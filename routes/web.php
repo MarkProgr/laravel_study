@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\JenreController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\SignUpController;
@@ -43,4 +45,16 @@ Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('sign-up');
 Route::get('/verify-email/{id}/{hash}', [SignUpController::class, 'verifyEmail'])->name('verify-email');
 
 Route::get('/sign-in', [AuthController::class, 'signInForm'])->name('login');
-Route::post('/sign-up', [AuthController::class, 'signIn'])->name('sign-in');
+Route::post('/sign-in', [AuthController::class, 'signIn'])->name('sign-in');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/create-jenre', [JenreController::class, 'addForm'])->name('add.jenre.form');
+Route::post('/create-jenre', [JenreController::class, 'add'])->name('add.jenre');
+
+Route::get('/actors/create', [ActorsController::class, 'addActorsForm'])->name('add.actor.form');
+Route::post('/actors/create', [ActorsController::class, 'addActors'])->name('add.actor');
+Route::get('/actors/list', [ActorsController::class, 'list'])->name('actors.list');
+Route::get('/actors/{actor}/edit', [ActorsController::class, 'editActorsForm'])->name('edit.actor.form');
+Route::post('/actors/{actor}/edit', [ActorsController::class, 'editActors'])->name('edit.actor');
+Route::post('/actors/{actor}/delete', [ActorsController::class, 'deleteActors'])->name('delete.actor');

@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class, 'user_id', 'id');
+    }
 }

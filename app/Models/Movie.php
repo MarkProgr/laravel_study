@@ -14,4 +14,19 @@ class Movie extends Model
         'year_of_issue',
         'description'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function jenres()
+    {
+        return $this->belongsToMany(Jenre::class, 'movie_jenres');
+    }
+
+    public function actors()
+    {
+        return $this->belongsToMany(Actor::class, 'movie_actors');
+    }
 }

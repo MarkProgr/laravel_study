@@ -26,7 +26,11 @@ class CreateRequest extends FormRequest
         return [
             'title' => ['required', 'min:1', 'max:255'],
             'year_of_issue' => ['required', 'numeric'],
-            'description' => ['required', 'min:100']
+            'description' => ['required', 'min:100'],
+            'jenres' => ['required', 'array', 'min:1'],
+            'jenres.*' => ['required', 'exists:jenres,id'],
+            'actors' => ['required', 'array', 'min:1'],
+            'actors.*' => ['required', 'exists:actors,id'],
         ];
     }
 }

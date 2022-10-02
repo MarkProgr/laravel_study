@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Movies\CreateRequest;
 use App\Http\Requests\Movies\EditRequest;
+use App\Models\Actor;
+use App\Models\Jenre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -11,14 +13,26 @@ class MoviesController extends Controller
 {
     public function createMovie()
     {
-        return view('movies.create-form');
+        $jenres = Jenre::all();
+
+        $actors = Actor::all();
+
+        return view('movies.create-form', compact('jenres', 'actors'));
     }
 
     public function createCard(CreateRequest $request)
     {
         $data = $request->validated();
         $movie = new Movie($data);
+
+        $user = $request->user();
+
+        $movie->user()->associate($user);
+
         $movie->save();
+
+        $movie->jenres()->attach($data['jenres']);
+        $movie->actors()->attach($data['actors']);
 
         session()->flash('success', trans('messages.movie.success'));
 
@@ -36,14 +50,21 @@ class MoviesController extends Controller
     {
         $movie = Movie::query()->findOrFail($id);
 
-        return view('movies.show-card', compact('movie'));
+        $jenres = $movie->jenres()->get()->pluck('name');
+
+        $actors = $movie->actors()->get();
+
+        return view('movies.show-card', compact('movie', 'jenres', 'actors'));
     }
 
     public function editForm(int $id)
     {
         $movie = Movie::query()->findOrFail($id);
 
-        return view('movies.edit-form', compact('movie'));
+        $jenres = Jenre::all();
+        $actors = Actor::all();
+
+        return view('movies.edit-form', compact('movie', 'jenres', 'actors'));
     }
 
     public function edit(int $id, EditRequest $request)
@@ -53,10 +74,12 @@ class MoviesController extends Controller
         $data = $request->validated();
         $movie->fill($data);
         $movie->save();
+        $movie->jenres()->sync($data['jenres']);
+        $movie->actors()->sync($data['actors']);
 
-        session()->flash('success', trans('messages.movie.success'));
+        session()->flash('success', trans('messages.movie.edit'));
 
-        return redirect()->route('movies.list', ['id' => $movie->id]);
+        return redirect()->route('movies.show.card', ['id' => $movie->id]);
     }
 
     public function deleteMovie(int $id)

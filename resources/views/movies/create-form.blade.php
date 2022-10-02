@@ -9,7 +9,7 @@
         <div class="mb-3">
             <label for="title" class="form-label">{{ __('validation.attributes.title') }}</label>
             <input type="text" value="{{ old('title') }}" class="form-control  @error('title') is-invalid @enderror" aria-describedby="emailHelp" name="title">
-            @error('email')
+            @error('title')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>
@@ -28,6 +28,31 @@
             @error('description')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="jenres">Jenres:</label>
+            @error('jenres')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @foreach($jenres as $jenre)
+                <div class="form-check">
+                    <input type="checkbox" name="jenres[]" value="{{ $jenre->id }}" class="form-check-input"> {{ $jenre->name }}
+                </div>
+            @endforeach
+        </div>
+
+        <div class="form-group">
+            <label for="actors">Actors:</label>
+            @error('actors')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @foreach($actors as $actor)
+                <div class="form-check">
+                    <input type="checkbox" name="actors[]" value="{{ $actor->id }}" class="form-check-input">
+                        {{ $actor->name }} {{ $actor->surname }}
+                </div>
+            @endforeach
         </div>
 
         <button type="submit" class="btn btn-danger">Submit</button>

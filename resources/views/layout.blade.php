@@ -23,6 +23,15 @@
                     <a class="nav-link" href="{{ route('movies.list') }}">Films</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('add.jenre.form') }}">Add Jenre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('add.actor.form') }}">Add Actor</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('actors.list') }}">Actors</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contact Us</a>
                 </li>
                 @endif
