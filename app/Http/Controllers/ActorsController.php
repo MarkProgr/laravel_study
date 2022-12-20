@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Actors\CreateRequest;
 use App\Http\Requests\Actors\EditRequest;
 use App\Models\Actor;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class ActorsController extends Controller
         return view('actors.create-form');
     }
 
-    public function addActors(\App\Http\Requests\Actors\Request $request)
+    public function addActors(CreateRequest $request)
     {
         $data = $request->validated();
         $actor = new Actor($data);

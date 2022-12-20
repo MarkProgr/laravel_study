@@ -5,19 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Movies\CreateRequest;
 use App\Http\Requests\Movies\EditRequest;
 use App\Models\Actor;
-use App\Models\Jenre;
+use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
 {
-    public function createMovie()
+    public function createMovie(Request $request)
     {
-        $jenres = Jenre::all();
+        $genres = Genre::all();
 
         $actors = Actor::all();
 
-        return view('movies.create-form', compact('jenres', 'actors'));
+        return view('movies.create-form', compact('genres', 'actors'));
     }
 
     public function createCard(CreateRequest $request)
@@ -26,12 +26,13 @@ class MoviesController extends Controller
         $movie = new Movie($data);
 
         $user = $request->user();
+//        dd($user);
 
         $movie->user()->associate($user);
 
         $movie->save();
 
-        $movie->jenres()->attach($data['jenres']);
+        $movie->genres()->attach($data['genres']);
         $movie->actors()->attach($data['actors']);
 
         session()->flash('success', trans('messages.movie.success'));
@@ -50,21 +51,21 @@ class MoviesController extends Controller
     {
         $movie = Movie::query()->findOrFail($id);
 
-        $jenres = $movie->jenres()->get()->pluck('name');
+        $genres = $movie->genres()->get()->pluck('name');
 
         $actors = $movie->actors()->get();
 
-        return view('movies.show-card', compact('movie', 'jenres', 'actors'));
+        return view('movies.show-card', compact('movie', 'genres', 'actors'));
     }
 
     public function editForm(int $id)
     {
         $movie = Movie::query()->findOrFail($id);
 
-        $jenres = Jenre::all();
+        $genres = Genre::all();
         $actors = Actor::all();
 
-        return view('movies.edit-form', compact('movie', 'jenres', 'actors'));
+        return view('movies.edit-form', compact('movie', 'genres', 'actors'));
     }
 
     public function edit(int $id, EditRequest $request)
@@ -74,7 +75,7 @@ class MoviesController extends Controller
         $data = $request->validated();
         $movie->fill($data);
         $movie->save();
-        $movie->jenres()->sync($data['jenres']);
+        $movie->genres()->sync($data['genres']);
         $movie->actors()->sync($data['actors']);
 
         session()->flash('success', trans('messages.movie.edit'));

@@ -16,21 +16,29 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 @if(auth()->check())
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('movies.create.form') }}">Add film into library</a>
-                </li>
+                    @can('create', \App\Models\Movie::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('movies.create.form') }}">Add film into library</a>
+                        </li>
+                    @endcan
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('movies.list') }}">Films</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('add.jenre.form') }}">Add Jenre</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('add.actor.form') }}">Add Actor</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('actors.list') }}">Actors</a>
-                </li>
+                    @can('create', \App\Models\Genre::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('add.genre.form') }}">Add Genre</a>
+                        </li>
+                    @endcan
+                    @can('create', \App\Models\Actor::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('add.actor.form') }}">Add Actor</a>
+                        </li>
+                    @endcan
+                    @can('show', \App\Models\Actor::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('actors.list') }}">Actors</a>
+                        </li>
+                    @endcan
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contact Us</a>
                 </li>

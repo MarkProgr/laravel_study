@@ -3,6 +3,12 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Actor;
+use App\Models\Genre;
+use App\Models\Movie;
+use App\Policies\ActorPolicy;
+use App\Policies\GenrePolicy;
+use App\Policies\MoviePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -13,7 +19,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Movie::class => MoviePolicy::class,
+        Genre::class => GenrePolicy::class,
+        Actor::class => ActorPolicy::class,
     ];
 
     /**

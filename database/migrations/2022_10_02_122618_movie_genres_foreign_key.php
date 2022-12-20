@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('movie_jenres', function (Blueprint $table) {
+        Schema::table('movie_genres', function (Blueprint $table) {
             $table->dropForeign(['movie_id']);
 
             $table->foreign('movie_id')->references('id')->on('movies')->cascadeOnDelete();

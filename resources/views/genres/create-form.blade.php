@@ -3,7 +3,7 @@
 @section('title', 'Add Film Jenre')
 
 @section('content')
-    <form action="{{ route('add.jenre') }}" method="post">
+    <form action="{{ route('add.genre') }}" method="post">
         @csrf
 
         <div class="mb-3">

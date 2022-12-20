@@ -31,13 +31,13 @@
         </div>
 
         <div class="form-group">
-            <label for="jenres">Jenres:</label>
-            @error('jenres')
+            <label for="genres">Genres:</label>
+            @error('genres')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            @foreach($jenres as $jenre)
+            @foreach($genres as $genre)
                 <div class="form-check">
-                    <input type="checkbox" name="jenres[]" value="{{ $jenre->id }}" class="form-check-input"> {{ $jenre->name }}
+                    <input type="checkbox" name="genres[]" value="{{ $genre->id }}" class="form-check-input"> {{ $genre->name }}
                 </div>
             @endforeach
         </div>

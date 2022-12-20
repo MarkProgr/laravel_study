@@ -19,13 +19,17 @@
             <td>{{ $movie->created_at->format('d-m-Y') }}</td>
             <td>
                 <a class="btn btn-dark" href="{{ route('movies.show.card', ['id' => $movie->id]) }}">About</a>
+                @can('edit', $movie)
                 <a class="btn btn-dark" href="{{ route('movies.edit.form', ['id' => $movie->id]) }}">Edit</a>
+                @endcan
+                @can('delete', $movie)
                 <form action="{{ route('movies.delete', ['id' => $movie->id]) }}" method="post">
                     @csrf
                     <button class="btn btn-outline-warning">
                         Delete
                     </button>
                 </form>
+                @endcan
             </td>
         </tr>
         @endforeach
