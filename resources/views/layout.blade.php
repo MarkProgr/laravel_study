@@ -57,6 +57,7 @@
             </ul>
         </div>
         @if (auth()->check())
+            <a class="nav-link" href="{{ route('login.history') }}">Login History</a>
             <form action="{{ route('logout') }}" method="post" class="form-inline">
                 @csrf
                 <button class="btn btn-danger">Logout</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actor;
 use App\Models\Genre;
+use App\Models\LoginHistory;
 use App\Models\Movie;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,6 +54,13 @@ class MainController extends Controller
             ->appends($request->query());
 
         return view('welcome', compact('movies', 'genres', 'actors'));
+    }
+
+    public function indexLoginHistory()
+    {
+        $loggedUsers = LoginHistory::query()->paginate(10);
+
+        return view('login-history', compact('loggedUsers'));
     }
 
     public function about()

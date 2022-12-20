@@ -26,7 +26,6 @@ class MoviesController extends Controller
         $movie = new Movie($data);
 
         $user = $request->user();
-//        dd($user);
 
         $movie->user()->associate($user);
 

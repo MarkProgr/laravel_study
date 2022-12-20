@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'Add Film Jenre')
+@section('title', 'Add Film Genre')
 
 @section('content')
     <form action="{{ route('add.genre') }}" method="post">
