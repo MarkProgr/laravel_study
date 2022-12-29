@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    const ROLE_ADMIN = 'Admin';
+
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -46,5 +48,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class, 'user_id', 'id');
     }
 }

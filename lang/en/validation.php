@@ -175,7 +175,10 @@ return [
         'description' => 'Description',
         'password' => 'Password',
         'password_confirmation' => 'Password Confirmation',
-        'checkbox' => 'I agree all the Rules'
+        'checkbox' => 'I agree all the Rules',
+        'surname' => 'Surname',
+        'height' => 'Height',
+        'date_of_birth' => 'Date Of Birth'
     ],
 
 ];

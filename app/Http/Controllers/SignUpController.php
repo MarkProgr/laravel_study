@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserRegistered;
 use App\Http\Requests\SignUpRequest;
 use App\Mail\VerifyMail;
 use App\Models\User;
@@ -23,7 +24,8 @@ class SignUpController extends Controller
         $user = new User($data);
         $user->save();
 
-        Mail::to($user)->send(new VerifyMail($user));
+        $event = new UserRegistered($user);
+        event($event);
 
         session()->flash('success', 'Successfully authorized');
 

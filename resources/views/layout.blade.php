@@ -15,23 +15,54 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                @if(auth()->check())
+                    @can('create', \App\Models\Movie::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('movies.create.form') }}">Add film into library</a>
+                        </li>
+                    @endcan
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('movies.list') }}">Films</a>
+                </li>
+                    @can('create', \App\Models\Genre::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('add.genre.form') }}">Add Genre</a>
+                        </li>
+                    @endcan
+                    @can('create', \App\Models\Actor::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('add.actor.form') }}">Add Actor</a>
+                        </li>
+                    @endcan
+                    @can('show', \App\Models\Actor::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('actors.list') }}">Actors</a>
+                        </li>
+                    @endcan
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{{ route('contact') }}">Contact Us</a>
+                </li>
+                @endif
+                @if(!auth()->check())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('sign-up.form') }}">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Sign In</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">About Us</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('movies.create.form') }}">Add film into library</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('movies.list') }}">Films</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('sign-up.form') }}">Sign Up</a>
-                </li>
+                @endif
             </ul>
         </div>
+        @if (auth()->check())
+            <a class="nav-link" href="{{ route('login.history') }}">Login History</a>
+            <form action="{{ route('logout') }}" method="post" class="form-inline">
+                @csrf
+                <button class="btn btn-danger">Logout</button>
+            </form>
+        @endif
     </div>
 </nav>
 <div class="container">
