@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SignInRequest;
-use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\Api\Users\SignInRequest;
+use App\Http\Requests\Api\Users\SignUpRequest;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use Illuminate\Http\Response;

@@ -21,13 +21,9 @@ class UserService
         return $user;
     }
 
-    public function signIn(SignInRequest $request,array $credentials, string $guard)
+    public function signIn(SignInRequest $request, array $credentials, string $guard)
     {
-        $check = function ($user) {
-            return $user;
-        };
-
-        if (Auth::guard($guard)->attemptWhen($credentials, $check)) {
+        if (Auth::guard($guard)->attemptWhen($credentials)) {
             $user = \auth($guard)->user();
 
             $event = new UserLoggedIn($user, $request);

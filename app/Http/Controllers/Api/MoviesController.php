@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Movies\CreateRequest;
-use App\Http\Requests\Movies\EditRequest;
+use App\Http\Requests\Api\Movies\CreateRequest;
+use App\Http\Requests\Api\Movies\EditRequest;
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use App\Services\MovieService;
