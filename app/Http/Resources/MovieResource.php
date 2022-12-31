@@ -19,8 +19,8 @@ class MovieResource extends JsonResource
             'title' => $this->title,
             'year_of_issue' => $this->year_of_issue,
             'description' => $this->description,
-            'genres' => $this->genres,
-            'actors' => $this->actors
+            'genres' => GenreResource::collection($this->genres),
+            'actors' => ActorResource::collection($this->actors)
         ];
     }
 }
