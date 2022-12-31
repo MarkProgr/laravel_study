@@ -39,15 +39,15 @@ Route::get('/movies/create', [MoviesController::class, 'createMovie'])->name('mo
 Route::post('/movies/create', [MoviesController::class, 'createCard'])->name('movies.create')
     ->middleware(['can:create,' . Movie::class, 'emailVerified']);
 
-Route::get('/movies/{id}', [MoviesController::class, 'showCard'])->name('movies.show.card');
+Route::get('/movies/{movie}', [MoviesController::class, 'showCard'])->name('movies.show.card');
 
-Route::get('/movies/{id}/edit', [MoviesController::class, 'editForm'])->name('movies.edit.form')
-    ->middleware(['can:edit,' . Movie::class, 'emailVerified']);
-Route::post('/movies/{id}/edit', [MoviesController::class, 'edit'])->name('movies.edit.card')
-    ->middleware(['can:edit,' . Movie::class, 'emailVerified']);
+Route::get('/movies/{movie}/edit', [MoviesController::class, 'editForm'])->name('movies.edit.form')
+    ->middleware(['can:edit,movie', 'emailVerified']);
+Route::post('/movies/{movie}/edit', [MoviesController::class, 'edit'])->name('movies.edit.card')
+    ->middleware(['can:edit,movie', 'emailVerified']);
 
-Route::post('/movies/{id}/delete', [MoviesController::class, 'deleteMovie'])->name('movies.delete')
-    ->middleware(['can:delete,' . Movie::class, 'emailVerified']);
+Route::post('/movies/{movie}/delete', [MoviesController::class, 'deleteMovie'])->name('movies.delete')
+    ->middleware(['can:delete,movie', 'emailVerified']);
 
 Route::get('/sign-up', [SignUpController::class, 'showForm'])->name('sign-up.form');
 Route::post('/sign-up', [SignUpController::class, 'signUp'])->name('sign-up');

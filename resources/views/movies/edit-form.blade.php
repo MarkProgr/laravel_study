@@ -3,7 +3,7 @@
 @section('title', 'Edit Film')
 
 @section('content')
-    <form action="{{ route('movies.edit.card', ['id' => $movie->id]) }}" method="post">
+    <form action="{{ route('movies.edit.card', ['movie' => $movie->id]) }}" method="post">
         @csrf
 
         <div class="mb-3">

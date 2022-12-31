@@ -7,10 +7,15 @@ use App\Http\Requests\Movies\EditRequest;
 use App\Models\Actor;
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Services\MovieService;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
 {
+    public function __construct(private MovieService $movieService)
+    {
+    }
+
     public function createMovie(Request $request)
     {
         $genres = Genre::all();
@@ -22,17 +27,7 @@ class MoviesController extends Controller
 
     public function createCard(CreateRequest $request)
     {
-        $data = $request->validated();
-        $movie = new Movie($data);
-
-        $user = $request->user();
-
-        $movie->user()->associate($user);
-
-        $movie->save();
-
-        $movie->genres()->attach($data['genres']);
-        $movie->actors()->attach($data['actors']);
+        $this->movieService->create($request->validated(), $request->user());
 
         session()->flash('success', trans('messages.movie.success'));
 
@@ -46,10 +41,8 @@ class MoviesController extends Controller
         return view('movies.list', compact('movies'));
     }
 
-    public function showCard(int $id)
+    public function showCard(Movie $movie)
     {
-        $movie = Movie::query()->findOrFail($id);
-
         $genres = $movie->genres()->get()->pluck('name');
 
         $actors = $movie->actors()->get();
@@ -57,35 +50,26 @@ class MoviesController extends Controller
         return view('movies.show-card', compact('movie', 'genres', 'actors'));
     }
 
-    public function editForm(int $id)
+    public function editForm(Movie $movie)
     {
-        $movie = Movie::query()->findOrFail($id);
-
         $genres = Genre::all();
         $actors = Actor::all();
 
         return view('movies.edit-form', compact('movie', 'genres', 'actors'));
     }
 
-    public function edit(int $id, EditRequest $request)
+    public function edit(Movie $movie, EditRequest $request)
     {
-        $movie = Movie::query()->findOrFail($id);
-
-        $data = $request->validated();
-        $movie->fill($data);
-        $movie->save();
-        $movie->genres()->sync($data['genres']);
-        $movie->actors()->sync($data['actors']);
+        $this->movieService->edit($movie, $request->validated());
 
         session()->flash('success', trans('messages.movie.edit'));
 
-        return redirect()->route('movies.show.card', ['id' => $movie->id]);
+        return redirect()->route('movies.list');
     }
 
-    public function deleteMovie(int $id)
+    public function deleteMovie(Movie $movie)
     {
-        $movie = Movie::query()->findOrFail($id)->delete();
-
+        $this->movieService->delete();
         session()->flash('success', trans('messages.movie.delete'));
         return redirect()->route('movies.list');
     }

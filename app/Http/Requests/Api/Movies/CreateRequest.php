@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Movies;
+namespace App\Http\Requests\Api\Movies;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditRequest extends FormRequest
+class CreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

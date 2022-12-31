@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\UserLoggedIn;
 use App\Http\Requests\SignInRequest;
 use App\Models\LoginHistory;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,7 +27,7 @@ class StoreUserLoginHistory
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(UserLoggedIn $event)
     {
         $entry = new LoginHistory();
         $entry->user_id = $event->user->id;
