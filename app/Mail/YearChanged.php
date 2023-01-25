@@ -30,7 +30,9 @@ class YearChanged extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.year_changed',
-        ['name' => $this->movie->name]);
+        return $this->view(
+            'emails.year_changed',
+            ['name' => $this->movie->name]
+        );
     }
 }
